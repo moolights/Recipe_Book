@@ -4,58 +4,42 @@ Take a bunch of recipes and put them in one place for easy access
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+A user will be provided with a list of recipes to choose from. After a selection is made, the recipe will be output to the console
+for the user to see/use. The end goal of the project is to allow the user to select specific ingredients and have them match with the closest
+recipe.
 
 ## Getting Started
 
 ### Dependencies
 
-* None besides a PC or Mac
+* Must be running current version of Java 20
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* N/A
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
+* As of now, the only recipe that can be entered when prompted is "Beef-Bowl.txt
+* Later versions of the program will include list selections as well as recipes found based on selected ingredients.
 
 ## Help
 
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
+If any issues are found or ways to make the program more efficient, please feel free to email me.
 
 ## Authors
 
-Contributors names and contact info
-
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
+Wyatt Boublil (Moolights)
+wiggles_worth@outlook.com
 
 ## Version History
 
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
+* 0.1 Initial release
 
 ## License
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+N/A
 
 ## Acknowledgments
 
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+N/A
