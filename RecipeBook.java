@@ -6,8 +6,8 @@ public class RecipeBook {
     public static void main(String[] args) throws IOException {
 
         Recipe myChoice = Recipe.parseFile(RecipeBook.recipeSelector());
-        System.out.println(myChoice.title);
-        System.out.println(myChoice.ingredients);
+        System.out.println("\n" + myChoice.title);
+        System.out.println("\n" + myChoice.ingredients);
     }
 
     // Clean up names that are printed on the console so they don't contain .txt or hyphens
@@ -25,8 +25,9 @@ public class RecipeBook {
         System.out.println("\nPlease choose a recipe:\n");
 
         for(int i = 0; i <= recipeNames.size() - 1; i++) {
-            System.out.println((i + 1) + ". " + recipeNames.get(i));
+            System.out.println((i + 1) + ". " + Recipe.formatFileName(recipeNames.get(i)));
         }
+        System.out.print("\nYour choice: ");
         userSelection = input.nextInt();
 
         switch(userSelection) {

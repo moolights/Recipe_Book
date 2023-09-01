@@ -73,6 +73,21 @@ public class Recipe {
 
 	  return recipeNames;
    	}
+    
+    /***
+     * Takes a file name and formats it to a user-friendly view by removing certain special
+     * characters
+     * @param name a file to be formatted
+     * @return a formatted file name without specified special characters and file extensions
+     */
+    public static String formatFileName(String name) {
+        String formattedName = "";
+        if(name.endsWith(".txt")) {
+            String removeSuffix = name.substring(0, name.lastIndexOf("."));
+            formattedName = removeSuffix.replace("-", " ");
+        }
+        return formattedName;
+    }
 
 	/***
 	 * Compares an ingredient on the recipe with a specified ingredient to check for an allergy
