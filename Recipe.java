@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.io.File;
 import java.io.IOException;
 
 public class Recipe {
-    String title;
-    ArrayList<String> ingredients;
-    String instructions;
+   	String title;
+   	ArrayList<String> ingredients;
+	String instructions;
 
     /**
      * Empty Constructor
@@ -25,15 +26,17 @@ public class Recipe {
         this.instructions = instructions;
     }
 
+	// When recipe name is passed to parseFile, there is a noSuchFileException thrown. Possibly due to the files being in a folder (needs fixing)
+
     /***
      * Parses a txt file containing a recipe into a Recipe object
-     * @param file name of the file to be parsed
+     * @param recipeName name of the file to be parsed
      * @return a Recipe Object
      * @throws IOException if the file name provided doesn't match
      */
-    public static Recipe parseFile(String file) throws IOException {
+    public static Recipe parseFile(String recipeName) throws IOException {
         int instructionStart = 0;
-        String recipeFile = Files.readString(Paths.get(file));
+        String recipeFile = Files.readString(Paths.get(recipeName));
         String[] recipeLines = recipeFile.split("\n");
 
         String recipeTitle = recipeLines[0]; // Gets title of recipe
@@ -54,23 +57,38 @@ public class Recipe {
         }
 
         Recipe recipe = new Recipe(recipeTitle, ingredientList, recipeInstructions);
-        return recipe;
 
+        return recipe;
     }
 
     /***
-     * Compares an ingredient on the recipe with a specified ingredient to check for an allergy
-     * @param ingredients list of ingredients from the recipe
-     * @param allergen specified ingredient by the user
-     * @return true if the allergen matches or false if it doesn't
-     */
+	 * Access files in the RecipesList folder to be used by parseFile() and recipeSelector()
+	 * @return an ArrayList comprised of the recipe names
+	 */
+   	public static ArrayList<String> accessFolder() {
+      File folder = new File("/Users/wigglesworth/Documents/Projects/Recipe_Book/RecipesList/");
+	  File[] fileNames = folder.listFiles();
+	  ArrayList<String> recipeNames = new ArrayList<String>();
+	  for(int i = 0; i <= fileNames.length - 1; i++) {
+		recipeNames.add(fileNames[i].getName());
+	  }
+
+	  return recipeNames;
+   	}
+
+	/***
+	 * Compares an ingredient on the recipe with a specified ingredient to check for an allergy
+	 * @param ingredients list of ingredients from the recipe
+	 * @param allergen specified ingredient by the user
+	 * @return true if the allergen matches or false if it doesn't
+	 */
     public boolean containsAllergen(ArrayList<String> ingredients, String allergen) {
         for(String ingredient : ingredients) {
-            if(ingredient.equals(allergen)) {
-                System.out.println("Ingredient: " + ingredient + "  " + allergen);
+        	if(ingredient.equals(allergen)) {
+            	System.out.println("Ingredient: " + ingredient + "  " + allergen);
                 return true;
             } 
         }
-        return false;
+        	return false;
     }
 }

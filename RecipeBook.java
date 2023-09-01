@@ -1,30 +1,46 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.io.IOException;
 
 public class RecipeBook {
     public static void main(String[] args) throws IOException {
+
+        Recipe myChoice = Recipe.parseFile(RecipeBook.recipeSelector());
+        System.out.println(myChoice.title);
+        System.out.println(myChoice.ingredients);
+    }
+
+    // Clean up names that are printed on the console so they don't contain .txt or hyphens
+    /***
+     * Call accessFolder method, prints recipe options to console
+     * and then prompts user for a recipe choice 
+     * @return the recipe name
+     */
+    public static String recipeSelector() {
+        ArrayList<String> recipeNames = Recipe.accessFolder();
         Scanner input = new Scanner(System.in);
-        System.out.println("What recipe are you searching for?");
+        int userSelection = 0;
+        String recipe = "";
 
-        // Figure out how to print a list of the recipe files for a user to select from
+        System.out.println("\nPlease choose a recipe:\n");
 
-        // Need to make selection based on a numbered list rather than text to avoid
-        // input errors
-
-        String recipeName = input.nextLine(); // Waits for user input
-        Recipe recipe = Recipe.parseFile(recipeName); // Creates a recipe by calling parseFile()
-        input.close(); // Closes Scanner
-
-        // Recipe recipe = Recipe.parseFile(args[0]);
-
-        /*
-         * Prints out a formatted recipe
-         */
-        System.out.println();
-        System.out.println(recipe.title + "\n");
-        for(String ingredient : recipe.ingredients) {
-            System.out.println("-" + ingredient);
+        for(int i = 0; i <= recipeNames.size() - 1; i++) {
+            System.out.println((i + 1) + ". " + recipeNames.get(i));
         }
-        System.out.println("\n" + recipe.instructions);
+        userSelection = input.nextInt();
+
+        switch(userSelection) {
+            case 1:
+                recipe = recipeNames.get(0);
+                break;
+            case 2:
+                recipe = recipeNames.get(1);
+                break;
+            default:
+                recipe = "No selection made";
+                break;
+        }
+        input.close();
+        return recipe;
     }
 }
