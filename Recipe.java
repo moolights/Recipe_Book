@@ -95,7 +95,7 @@ public class Recipe {
      * and then prompts user for a recipe choice 
      * @return the recipe name
      */
-    public static String recipeSelector() {
+    public static String recipeSelector() throws IOException {
         ArrayList<String> recipeNames = Recipe.accessFolder();
         Scanner input = new Scanner(System.in);
         int userSelection = 0;
@@ -109,6 +109,7 @@ public class Recipe {
         System.out.print("\nYour choice: ");
         userSelection = input.nextInt();
 
+        // need to set up look and catch exceptions for numbers not there 
         switch(userSelection) {
             case 1:
                 recipe = recipeNames.get(0);
@@ -117,9 +118,9 @@ public class Recipe {
                 recipe = recipeNames.get(1);
                 break;
             default:
-                recipe = "No selection made";
                 break;
         }
+        
         input.close();
         return recipe;
     }
