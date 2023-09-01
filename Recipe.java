@@ -26,8 +26,6 @@ public class Recipe {
         this.instructions = instructions;
     }
 
-	// When recipe name is passed to parseFile, there is a noSuchFileException thrown. Possibly due to the files being in a folder (needs fixing)
-
     /***
      * Parses a txt file containing a recipe into a Recipe object
      * @param recipeName name of the file to be parsed
@@ -36,7 +34,7 @@ public class Recipe {
      */
     public static Recipe parseFile(String recipeName) throws IOException {
         int instructionStart = 0;
-        String recipeFile = Files.readString(Paths.get(recipeName));
+        String recipeFile = Files.readString(Paths.get("/Users/wigglesworth/Documents/Projects/Recipe_Book/RecipesList/" + recipeName));
         String[] recipeLines = recipeFile.split("\n");
 
         String recipeTitle = recipeLines[0]; // Gets title of recipe
