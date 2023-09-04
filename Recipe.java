@@ -115,7 +115,7 @@ public class Recipe {
             userSelection = input.nextInt();
 
             if(userSelection >= 3) {
-            System.out.println("Please choose again...\n");
+            System.out.println("Recipe does not exist...\n");
             }
             
             switch(userSelection) {
