@@ -34,6 +34,10 @@ public class Recipe {
      * @throws IOException if the file name provided doesn't match
      */
     public static Recipe parseFile(String recipeName) throws IOException {
+        if(recipeName.equals("")) {
+            Recipe emptyRecipe = new Recipe();
+            return emptyRecipe;
+        }
         int instructionStart = 0;
         String recipeFile = Files.readString(Paths.get("/Users/wigglesworth/Documents/Projects/Recipe_Book/RecipesList/" + recipeName));
         String[] recipeLines = recipeFile.split("\n");
@@ -101,28 +105,40 @@ public class Recipe {
         int userSelection = 0;
         String recipe = "";
 
-        System.out.println("\nPlease choose a recipe:\n");
+        while(userSelection != -1 ) {
+            System.out.println("\nPlease choose a recipe:\n");
 
-        for(int i = 0; i <= recipeNames.size() - 1; i++) {
-            System.out.println((i + 1) + ". " + Recipe.formatFileName(recipeNames.get(i)));
-        }
-        System.out.print("\nYour choice: ");
-        userSelection = input.nextInt();
+            for(int i = 0; i <= recipeNames.size() - 1; i++) {
+                System.out.println((i + 1) + ". " + Recipe.formatFileName(recipeNames.get(i)));
+            }
+            System.out.print("\nYour choice (-1 to exit): ");
+            userSelection = input.nextInt();
 
-        // need to set up look and catch exceptions for numbers not there 
-        switch(userSelection) {
-            case 1:
-                recipe = recipeNames.get(0);
-                break;
-            case 2:
-                recipe = recipeNames.get(1);
-                break;
-            default:
-                break;
+            if(userSelection >= 3) {
+            System.out.println("Please choose again...\n");
+            }
+            
+            switch(userSelection) {
+                case 1:
+                    recipe = recipeNames.get(0);
+                    break;
+                case 2:
+                    recipe = recipeNames.get(1);
+                    break;
+                default:
+                    break;
+            }            
         }
-        
         input.close();
         return recipe;
+    }
+
+    /***
+     * Checks if the object is empty and is valid
+     * @return true if an object is valid or false if its empty
+     */
+    public boolean isValid() {
+        return title != null && ingredients != null && instructions != null;
     }
 
 	/***
