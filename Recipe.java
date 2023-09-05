@@ -48,7 +48,7 @@ public class Recipe {
         
         for(int i = 0; i <= recipeLines.length - 1; i++) {
             if(recipeLines[i].startsWith("-")) {
-                ingredientList.add(recipeLines[i].replace("- ", ""));
+                ingredientList.add(recipeLines[i].replace(" -", ""));
             }
             if(recipeLines[i].equals("Recipe:")) {
                 instructionStart = i;
@@ -104,8 +104,9 @@ public class Recipe {
         Scanner input = new Scanner(System.in);
         int userSelection = 0;
         String recipe = "";
+        boolean selected = false;
 
-        while(userSelection != -1 ) {
+        while(selected == false && userSelection != -1) {
             System.out.println("\nPlease choose a recipe:\n");
 
             for(int i = 0; i <= recipeNames.size() - 1; i++) {
@@ -121,9 +122,11 @@ public class Recipe {
             switch(userSelection) {
                 case 1:
                     recipe = recipeNames.get(0);
+                    selected = true;
                     break;
                 case 2:
                     recipe = recipeNames.get(1);
+                    selected = true;
                     break;
                 default:
                     break;
@@ -138,7 +141,7 @@ public class Recipe {
      * @return true if an object is valid or false if its empty
      */
     public boolean isValid() {
-        return title != null && ingredients != null && instructions != null;
+        return this.title != null && this.ingredients != null && this.instructions != null;
     }
 
 	/***
@@ -150,10 +153,38 @@ public class Recipe {
     public boolean containsAllergen(ArrayList<String> ingredients, String allergen) {
         for(String ingredient : ingredients) {
         	if(ingredient.equals(allergen)) {
-            	System.out.println("Ingredient: " + ingredient + "  " + allergen);
+            	System.out.println("Ingredient: " + ingredient + " | " + allergen);
                 return true;
             } 
         }
-        	return false;
+        return false;
+    }
+
+    /***
+     * Getter for Recipe name
+     * @return the recipe name
+     */
+    public String getTitle() {
+        return this.title;
+    }
+
+    /***
+     * Getter for ingredients
+     * @return an ArrayList of ingredients for a recipe
+     */
+    public ArrayList<String> getIngredients() {
+        ArrayList<String> formattedIngredients = new ArrayList<String>();
+        for(String ingredient : this.ingredients) {
+            formattedIngredients.add(ingredient.replace("- ", ""));
+        }
+        return formattedIngredients;
+    }
+
+    /***
+     * Getter for recipe instructions
+     * @return instructions for a recipe
+     */
+    public String getInstructions() {
+        return this.instructions;
     }
 }
